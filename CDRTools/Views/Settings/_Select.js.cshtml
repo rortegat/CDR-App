@@ -1,0 +1,16 @@
+﻿<script>
+function llamarVistaParcial() {
+    var laURLDeLaVista = '@Url.Action("LeerArchivo", "Settings")';
+    $.ajax({
+        cache: false,
+        async: true,
+        type: "GET",
+        url: laURLDeLaVista,
+        data: {},
+        success: function (response) {
+            $('#contentConf').html('');
+            $('#contentConf').html(response);
+        }
+    });
+}
+</script>

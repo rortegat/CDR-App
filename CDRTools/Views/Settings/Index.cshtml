@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Archivo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Menue {
+    @{ Html.RenderPartial("_LeerArchivo"); }
+}
+
+@section Scripts {
+    @{ Html.RenderPartial("_Select.js"); }
+}

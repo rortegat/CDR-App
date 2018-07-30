@@ -1,0 +1,63 @@
+﻿@using CDRTools.Models
+@model IndexViewModel
+
+@*<button class="btn btn-default" id="chango">boton</button>*@
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Hora Llamada</th>
+            <th>Numero Origen</th>
+            <th>Numero Destino</th>
+            <th>Duracion</th>
+        </tr>
+        @foreach (var llamada in Model.Llamadas)
+        {
+            <tr>
+                <td>@llamada.dateTimeOrigination</td>
+                <td>@llamada.callingPartyNumber</td>
+                <td>@llamada.originalCalledPartyNumber</td>
+                <td>@llamada.duration</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<!-- pager -->
+<div class="container">
+    @if (Model.Pager.EndPage > 1)
+    {
+        <ul class="pagination">
+            @if (Model.Pager.CurrentPage > 1)
+            {
+                <li onclick="conexion(1);">
+                    <a href=#>First</a>
+                </li>
+                <li onclick="conexion(@(Model.Pager.CurrentPage - 1));">
+                    <a href=#>Previous</a>
+                </li>
+            }
+
+            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")" onclick="conexion(@page);">
+                    <a href="#">@page</a>
+                </li>}
+
+            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <li onclick="conexion(@(Model.Pager.CurrentPage + 1));">
+
+                    <a href=#>Next</a>
+                </li>
+                <li onclick="conexion(@(Model.Pager.TotalPages));">
+                    <a href=#>Last</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+<div class="col-sm-2">
+    <div class="btn btn-default">@Html.ActionLink("Create PDF", "CreateReport", "Reporte")</div>
+</div>
