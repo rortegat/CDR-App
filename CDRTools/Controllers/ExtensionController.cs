@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CDRTools.DBServices;
 using System.Web.Mvc;
+using CDRTools.Models;
 
 namespace CDRTools.Controllers
 {
     public class ExtensionController : Controller
     {
-        // GET: Extension
-        public ActionResult Index()
+        public ActionResult Extensiones()
         {
-            return View();
+            ViewData["Message"] = "Edita tus extensiones";
+
+            return View("Index");
         }
 
+        public ActionResult Crear() {
+            return View("_CrearExtension");
+        }
+
+    }
+}
+/*
         // GET: Extension/Details/5
         public ActionResult Details(int id)
         {
@@ -86,4 +96,4 @@ namespace CDRTools.Controllers
             }
         }
     }
-}
+}*/

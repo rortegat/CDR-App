@@ -308,6 +308,8 @@
     <Content Include="Views\Settings\_LeerArchivo.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Llamada\_ReportesLlamada.cshtml" />
+    <Content Include="Views\Extension\Index.cshtml" />
+    <Content Include="Views\Extension\_CrearExtension.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -318,7 +320,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Autorizacion\" />
-    <Folder Include="Views\Extension\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

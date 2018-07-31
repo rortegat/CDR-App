@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Extensiones";
+}
+
+<h3>@ViewData["Message"]</h3>
+
+
+<button id="nuevaExt" class="btn btn-success">Nueva extensión</button>
+
+<div id="contenido"></div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#nuevaExt").click(function (e) {
+            e.preventDefault();
+            $.get('@Url.Action("Crear","Extension")', function (result) {
+                $('#contenido').html(result);
+            });
+        });
+
+        $("#regresar").click(function (e) {
+            e.preventDefault();
+            $.get('@Url.Action("Extensiones","Extension")', function (result) {
+                $('#contenido').html(result);
+            });
+        });
+    });
+</script>

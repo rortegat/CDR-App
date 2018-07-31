@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using System.Web.Hosting;
-
 using CDRTools.DBServices;
 using CDRTools.ReportsServices;
 

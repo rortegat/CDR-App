@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CDRTools.Models
 {
+ 
     public class Extension
     {
         [Required]
@@ -16,4 +17,5 @@ namespace CDRTools.Models
         [StringLength(100)]
         public string Extension_Descripcion { get; set; }
     }
+    
 }

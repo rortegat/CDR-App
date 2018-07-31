@@ -11,31 +11,15 @@
             <li class="sidebar-brand">
                 <span class="navbar-brand" aria-hidden="true"></span><font color="#337AB7"> Llamadas</font>
             </li>
-            @*<li>
-                <a href="#informesSubmenu" data-toggle="collapse" aria-expanded="false"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span><font color="#337AB7"> Llamadas</font></a>
-                <ul id="informesSubmenu">
-                    <li class="custom-li"><a href="javascript:loadReport('Informe 1',1)">Informe 1</a></li>
-                    <li class="custom-li">@Html.ActionLink("Cargar LLamadas", "GetReporte", "Reporte")</li>
-                    <li class="custom-li">@Html.ActionLink("Alta Exteniones", "GetReport", "Reporte", new { @class = "GetReportA" })</li>
-                    <li class="custom-li">@Html.ActionLink("Codigos de autrizacion", "Container", "Reporte", new { @class = "GetReportsLink" })</li>
-                </ul>
-            </li>*@
+       
             <li>    
                 <ul>
-                    <dd>@Html.ActionLink("Carga Llamadas", "Index", "Llamada")</dd>
-                    <dd><a href="#informesSubmenu"> Alta Extenciones</a></dd>
-                    <dd><a href="#informesSubmenu"> Codigos de Autorizacion</a></dd>
+                    <li>@Html.ActionLink("Carga Llamadas", "Index", "Llamada")</li>
+                    <li><a href="#"> Alta Extensiones</a></li>
+                    <li><a href="#"> Códigos de Autorización</a></li>
                 </ul>
                 
             </li>
-            @*<li>
-                <a href="#estadisticasSubmenu" data-toggle="collapse" aria-expanded="false"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span><font color="#337AB7"> Estadisticas</font></a>
-                <ul class="collapse list-unstyled" id="estadisticasSubmenu">
-                    <li class="custom-li"><a href="#">Grafica 1</a></li>
-                    <li class="custom-li"><a href="#">Grafica 2</a></li>
-                    <li class="custom-li"><a href="#">Grafica 3</a></li>
-                </ul>
-            </li>*@
         </ul>
         <span id="ocultar" class="pull-right">
             <button type="button" class="btn btn-link" data-toggle="icon">
