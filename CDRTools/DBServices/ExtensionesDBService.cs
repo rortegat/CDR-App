@@ -29,7 +29,7 @@ namespace CDRTools.DBServices
             {
                 Conn.Open();
 
-                Command.CommandType = CommandType.StoredProcedure;
+                //Command.CommandType = CommandType.StoredProcedure;
 
                 using (SqlDataReader DataReader = Command.ExecuteReader())
                 {
@@ -39,7 +39,7 @@ namespace CDRTools.DBServices
                             new Extension
                             {
                                 Id_Extension = Convert.ToInt32(DataReader["Id_Extension"]),
-                                Extension_Descripcion = Convert.ToString(DataReader["Extension_Describe"])
+                                Extension_Descripcion = Convert.ToString(DataReader["Extension_Descripcion"])
                             });
                     }
                 }

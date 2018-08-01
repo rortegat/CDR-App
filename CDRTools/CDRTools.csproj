@@ -287,7 +287,6 @@
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
@@ -301,7 +300,6 @@
     <Content Include="Views\Reporte\_Reports.js.cshtml" />
     <Content Include="Views\Reporte\_Reports.Container.cshtml" />
     <Content Include="Views\Reporte\GetReporte.cshtml" />
-    <Content Include="Views\Reporte\_Reports2.js.cshtml" />
     <Content Include="Views\Settings\_ConfigMenu.cshtml" />
     <Content Include="Views\Settings\_Select.js.cshtml" />
     <Content Include="Views\Settings\_Seleccionar.cshtml" />
@@ -310,6 +308,8 @@
     <Content Include="Views\Llamada\_ReportesLlamada.cshtml" />
     <Content Include="Views\Extension\Index.cshtml" />
     <Content Include="Views\Extension\_CrearExtension.cshtml" />
+    <Content Include="Views\Extension\_EditarExtension.cshtml" />
+    <Content Include="Views\Extension\_MostrarExtensiones.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

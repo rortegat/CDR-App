@@ -31,3 +31,44 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<script>
+        function conexion(pagina) {
+            var url = "/Reporte/GetReport?page=" + pagina;
+
+            if (window.XMLHttpRequest) {
+                request = new XMLHttpRequest();
+            }
+            else if (window.ActiveXObject) {
+                request = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            try {
+                request.onreadystatechange = getInfo;
+                request.open("GET", url, true);
+                request.send();
+            }
+            catch (e) {
+                alert("Unable to connect to server");
+            }
+        }
+
+        function getInfo() {
+            if (request.readyState == 4) {
+                var val = request.responseText;
+                document.getElementById('page-content-wrapper').innerHTML = val;
+            }
+        }
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.GetReportsLink').on('click', function (e) {
+        e.preventDefault();
+        $.get('@Url.Action("Container")', function (result) {
+            $('#page-content-wrapper').html(result);
+        });
+    });
+});
+
+
+</script>

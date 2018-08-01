@@ -14,10 +14,8 @@
                 <li>
                     <a href="#informesSubmenu" data-toggle="collapse" aria-expanded="false"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span><font color="#337AB7"> Informes</font></a>
                     <ul class="collapse list-unstyled" id="informesSubmenu">
-                        <li class="custom-li"><a href="javascript:loadReport('Informe 1',1)">Informe 1</a></li>
-                        <li class="custom-li">@Html.ActionLink("Informe 2", "GetReporte", "Reporte")</li>
-                        <li class="custom-li">@Html.ActionLink("Informe 3", "GetReport", "Reporte", new { @class = "GetReportA" })</li>
-                        <li class="custom-li">@Html.ActionLink("Informe 4", "Container", "Reporte", new { @class = "GetReportsLink" })</li>
+                        <li class="custom-li">@Html.ActionLink("Informe 1", "GetReport", "Reporte", new { @class = "GetReportA" })</li>
+                        <li class="custom-li">@Html.ActionLink("Informe 2", "Container", "Reporte", new { @class = "GetReportsLink" })</li>
                     </ul>
                 </li>
                 <li>
@@ -35,8 +33,6 @@
                 </button>
             </span>
         </div>
-
-
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">

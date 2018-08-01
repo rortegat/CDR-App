@@ -16,20 +16,19 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("Scripts", required: false)
     @RenderSection("topLevel", required: false)
     @RenderSection("Sidebar", required: false)
     @RenderSection("Menue", required: false)
-    @Scripts.Render("~/Reporte/_Reports")
 </head>
 <body>
-    @RenderBody()
-    
-
     <nav  class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <button type="button" class="navbar-toggle collapsed" 
+                        data-toggle="collapse" data-target="#navbar" 
+                        aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -37,63 +36,29 @@
                 </button>
                 <span class="navbar-brand">CDRTools</span>
             </div>
+
+
             <div id="navbar" class="navbar-collapse collapse">
                 @if ((bool)ViewBag.sessionInit)
                 {
                     @Html.Partial("_MenuPartial");
                 }
             </div>
+
+
         </div>
     </nav>
 
     
 
     <div id="bdy" class="container body-content">
+        @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Citel SA de CV</p>
         </footer>
     </div>
 
-    <script type="text/javascript">
-        (function ($) {
-            $(document).ready(function () {
-                $('ul.nav li.dropdown').hover(function () {
-                    $(this).find('.dropdown-menu').stop(true, true).fadeIn(50);
-                }, function () {
-                    $(this).find('.dropdown-menu').stop(true, true).fadeOut(50);
-                });
-            });
-        })(jQuery)
-    </script>
-
-    <script>
-        function conexion(pagina) {
-            var url = "/Reporte/GetReport?page=" + pagina;
-
-            if (window.XMLHttpRequest) {
-                request = new XMLHttpRequest();
-            }
-            else if (window.ActiveXObject) {
-                request = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            try {
-                request.onreadystatechange = getInfo;
-                request.open("GET", url, true);
-                request.send();
-            }
-            catch (e) {
-                alert("Unable to connect to server");
-            }
-        }
-
-        function getInfo() {
-            if (request.readyState == 4) {
-                var val = request.responseText;
-                document.getElementById('page-content-wrapper').innerHTML = val;
-            }
-        }
-    </script>
 </body>
 </html>
     

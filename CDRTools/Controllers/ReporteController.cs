@@ -62,27 +62,6 @@ namespace CDRTools.Models
             return PartialView("GetReporte",viewModel);
         }
 
-/*
-        public ActionResult GetReport_FirstVersion(string reporte)
-        {
-            int page = 1;
-
-            LlamadasDBService llamadasService = new LlamadasDBService();
-
-            var callDetails = llamadasService.Llamadas_Recupera();
-
-            var pager = new Pager(callDetails.Count(), page);
-
-            var viewModel = new IndexViewModel
-            {
-                Llamadas = callDetails.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
-                Pager = pager
-            };
-
-            return PartialView("GetReporte", viewModel);
-        }
-*/
-
         public FileResult CreateReport()
         {
             DateTime dTime = DateTime.Now;  

@@ -18,7 +18,7 @@ namespace CDRTools.Controllers
                 return RedirectToAction("Index", "Llamada");
             }
 
-            ViewBag.Title = "Hola";
+            ViewBag.Title = "Inicio";
 
             return View();
         }

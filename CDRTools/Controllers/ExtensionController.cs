@@ -10,90 +10,28 @@ namespace CDRTools.Controllers
 {
     public class ExtensionController : Controller
     {
-        public ActionResult Extensiones()
-        {
-            ViewData["Message"] = "Edita tus extensiones";
+        public ActionResult Index() {
+            ViewData["Message"] = "Extensiones";
 
-            return View("Index");
+            return View();
         }
 
         public ActionResult Crear() {
             return View("_CrearExtension");
         }
 
+        public ActionResult Mostrar() {
+
+            ExtensionesDBService ExtService = new ExtensionesDBService();
+            var data = ExtService.Extensiones_Recupera();
+            //var extensionId = data.ToList();
+
+
+
+            //ViewBag["message"] = data;
+
+            return View("_MostrarExtensiones");
+        }
+
     }
 }
-/*
-        // GET: Extension/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Extension/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Extension/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Extension/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Extension/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Extension/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Extension/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
-}*/

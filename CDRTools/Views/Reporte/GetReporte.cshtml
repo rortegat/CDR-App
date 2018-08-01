@@ -1,15 +1,14 @@
 ﻿@using CDRTools.Models
 @model IndexViewModel
 
-@*<button class="btn btn-default" id="chango">boton</button>*@
 
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <tr>
             <th>Hora Llamada</th>
-            <th>Numero Origen</th>
-            <th>Numero Destino</th>
-            <th>Duracion</th>
+            <th>Número Origen</th>
+            <th>Número Destino</th>
+            <th>Duración</th>
         </tr>
         @foreach (var llamada in Model.Llamadas)
         {

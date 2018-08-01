@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CDRTools.Models.Extension
+@{
     ViewData["Title"] = "Extensiones";
 }
 
@@ -6,23 +7,27 @@
 
 
 <button id="nuevaExt" class="btn btn-success">Nueva extensión</button>
-
-<div id="contenido"></div>
-
-
+<button id="mostrarExt" class="btn btn-info">Ver extensiones</button>
 <script>
     $(document).ready(function () {
         $("#nuevaExt").click(function (e) {
             e.preventDefault();
             $.get('@Url.Action("Crear","Extension")', function (result) {
-                $('#contenido').html(result);
+                $('.body-content').html(result);
+            });
+        });
+
+        $("#mostrarExt").click(function (e) {
+            e.preventDefault();
+            $.get('@Url.Action("Mostrar","Extension")', function (result) {
+                $('.body-content').html(result);
             });
         });
 
         $("#regresar").click(function (e) {
             e.preventDefault();
-            $.get('@Url.Action("Extensiones","Extension")', function (result) {
-                $('#contenido').html(result);
+            $.get('@Url.Action("Index","Extension")', function (result) {
+                $('.body-content').html(result);
             });
         });
     });

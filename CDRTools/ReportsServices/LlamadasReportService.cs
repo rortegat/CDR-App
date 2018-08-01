@@ -131,13 +131,13 @@ namespace CDRTools.ReportsServices
                     new Paragraph("Hora de llamada").SetFont(font)));
                 table.AddCell(
                         new Cell().Add(
-                            new Paragraph("Numero Origen").SetFont(font)));
+                            new Paragraph("Número Origen").SetFont(font)));
                 table.AddCell(
                         new Cell().Add(
-                            new Paragraph("Numero destino").SetFont(font)));
+                            new Paragraph("Número destino").SetFont(font)));
                 table.AddCell(
                         new Cell().Add(
-                            new Paragraph("Dracion").SetFont(font)));
+                            new Paragraph("Duración").SetFont(font)));
             }
                 else
                 {
