@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CDRRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Autorizaciones">
+          <Key>
+            <PropertyRef Name="Id_Autorizacion" />
+          </Key>
+          <Property Name="Id_Autorizacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Autorizacion_Codigo" Type="int" Nullable="false" />
+          <Property Name="Id_Extension" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Extensiones">
+          <Key>
+            <PropertyRef Name="Id_Extension" />
+          </Key>
+          <Property Name="Id_Extension" Type="int" Nullable="false" />
+          <Property Name="Extension_Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Llamadas">
+          <Key>
+            <PropertyRef Name="globalCallID_callManagerId" />
+            <PropertyRef Name="globalCallID_callId" />
+            <PropertyRef Name="dateTimeOrigination" />
+            <PropertyRef Name="callingPartyNumber" />
+            <PropertyRef Name="originalCalledPartyNumber" />
+            <PropertyRef Name="duration" />
+          </Key>
+          <Property Name="globalCallID_callManagerId" Type="int" Nullable="false" />
+          <Property Name="globalCallID_callId" Type="int" Nullable="false" />
+          <Property Name="dateTimeOrigination" Type="datetime" Nullable="false" />
+          <Property Name="callingPartyNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="originalCalledPartyNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="duration" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Autorizacion_Id_Extension">
+          <End Role="Extensiones" Type="Self.Extensiones" Multiplicity="1" />
+          <End Role="Autorizaciones" Type="Self.Autorizaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extensiones">
+              <PropertyRef Name="Id_Extension" />
+            </Principal>
+            <Dependent Role="Autorizaciones">
+              <PropertyRef Name="Id_Extension" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CDRRecordsModelStoreContainer">
+          <EntitySet Name="Autorizaciones" EntityType="Self.Autorizaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Extensiones" EntityType="Self.Extensiones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Llamadas" EntityType="Self.Llamadas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Llamadas].[globalCallID_callManagerId] AS [globalCallID_callManagerId], 
+    [Llamadas].[globalCallID_callId] AS [globalCallID_callId], 
+    [Llamadas].[dateTimeOrigination] AS [dateTimeOrigination], 
+    [Llamadas].[callingPartyNumber] AS [callingPartyNumber], 
+    [Llamadas].[originalCalledPartyNumber] AS [originalCalledPartyNumber], 
+    [Llamadas].[duration] AS [duration]
+    FROM [dbo].[Llamadas] AS [Llamadas]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_Autorizacion_Id_Extension" Association="Self.fk_Autorizacion_Id_Extension">
+            <End Role="Extensiones" EntitySet="Extensiones" />
+            <End Role="Autorizaciones" EntitySet="Autorizaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CDRRecordsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Autorizacion">
+          <Key>
+            <PropertyRef Name="Id_Autorizacion" />
+          </Key>
+          <Property Name="Id_Autorizacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Autorizacion_Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Id_Extension" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Extensione" Relationship="Self.fk_Autorizacion_Id_Extension" FromRole="Autorizaciones" ToRole="Extensiones" />
+        </EntityType>
+        <EntityType Name="Extension">
+          <Key>
+            <PropertyRef Name="Id_Extension" />
+          </Key>
+          <Property Name="Id_Extension" Type="Int32" Nullable="false" />
+          <Property Name="Extension_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Autorizaciones" Relationship="Self.fk_Autorizacion_Id_Extension" FromRole="Extensiones" ToRole="Autorizaciones" />
+        </EntityType>
+        <EntityType Name="Llamada">
+          <Key>
+            <PropertyRef Name="globalCallID_callManagerId" />
+            <PropertyRef Name="globalCallID_callId" />
+            <PropertyRef Name="dateTimeOrigination" />
+            <PropertyRef Name="callingPartyNumber" />
+            <PropertyRef Name="originalCalledPartyNumber" />
+            <PropertyRef Name="duration" />
+          </Key>
+          <Property Name="globalCallID_callManagerId" Type="Int32" Nullable="false" />
+          <Property Name="globalCallID_callId" Type="Int32" Nullable="false" />
+          <Property Name="dateTimeOrigination" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="callingPartyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="originalCalledPartyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="duration" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Autorizacion_Id_Extension">
+          <End Role="Extensiones" Type="CDRRecordsModel.Extension" Multiplicity="1" />
+          <End Role="Autorizaciones" Type="CDRRecordsModel.Autorizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extensiones">
+              <PropertyRef Name="Id_Extension" />
+            </Principal>
+            <Dependent Role="Autorizaciones">
+              <PropertyRef Name="Id_Extension" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CDRModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autorizacions" EntityType="CDRRecordsModel.Autorizacion" />
+          <EntitySet Name="Extensions" EntityType="CDRRecordsModel.Extension" />
+          <EntitySet Name="Llamadas" EntityType="Self.Llamada" />
+          <AssociationSet Name="fk_Autorizacion_Id_Extension" Association="Self.fk_Autorizacion_Id_Extension">
+            <End Role="Extensiones" EntitySet="Extensions" />
+            <End Role="Autorizaciones" EntitySet="Autorizacions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CDRRecordsModelStoreContainer" CdmEntityContainer="CDRModel">
+          <EntitySetMapping Name="Autorizacions">
+            <EntityTypeMapping TypeName="CDRRecordsModel.Autorizacion">
+              <MappingFragment StoreEntitySet="Autorizaciones">
+                <ScalarProperty Name="Id_Autorizacion" ColumnName="Id_Autorizacion" />
+                <ScalarProperty Name="Autorizacion_Codigo" ColumnName="Autorizacion_Codigo" />
+                <ScalarProperty Name="Id_Extension" ColumnName="Id_Extension" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Extensions">
+            <EntityTypeMapping TypeName="CDRRecordsModel.Extension">
+              <MappingFragment StoreEntitySet="Extensiones">
+                <ScalarProperty Name="Id_Extension" ColumnName="Id_Extension" />
+                <ScalarProperty Name="Extension_Descripcion" ColumnName="Extension_Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Llamadas">
+            <EntityTypeMapping TypeName="CDRRecordsModel.Llamada">
+              <MappingFragment StoreEntitySet="Llamadas">
+                <ScalarProperty Name="globalCallID_callManagerId" ColumnName="globalCallID_callManagerId" />
+                <ScalarProperty Name="globalCallID_callId" ColumnName="globalCallID_callId" />
+                <ScalarProperty Name="dateTimeOrigination" ColumnName="dateTimeOrigination" />
+                <ScalarProperty Name="callingPartyNumber" ColumnName="callingPartyNumber" />
+                <ScalarProperty Name="originalCalledPartyNumber" ColumnName="originalCalledPartyNumber" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

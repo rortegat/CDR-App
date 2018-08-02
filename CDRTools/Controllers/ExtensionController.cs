@@ -2,36 +2,104 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using CDRTools.DBServices;
 using System.Web.Mvc;
+using System.Data.Entity;
 using CDRTools.Models;
 
 namespace CDRTools.Controllers
 {
     public class ExtensionController : Controller
     {
-        public ActionResult Index() {
-            ViewData["Message"] = "Extensiones";
+        // GET: Extension
+        public ActionResult Index()
+        {
+            using(CDRModel dbModel = new CDRModel())
 
+            return View(dbModel.Extension.ToList());
+        }
+
+        // GET: Extension/Create
+        public ActionResult Crear()
+        {
             return View();
         }
 
-        public ActionResult Crear() {
-            return View("_CrearExtension");
+        // POST: Extension/Create
+        [HttpPost]
+        public ActionResult Crear(Extension extension)
+        {
+            try
+            {
+                using (CDRModel dbModel = new CDRModel()) {
+                    dbModel.Extension.Add(extension);
+                    dbModel.SaveChanges();
+                }
+
+                    return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        public ActionResult Mostrar() {
-
-            ExtensionesDBService ExtService = new ExtensionesDBService();
-            var data = ExtService.Extensiones_Recupera();
-            //var extensionId = data.ToList();
-
-
-
-            //ViewBag["message"] = data;
-
-            return View("_MostrarExtensiones");
+        // GET: Extension/Edit
+        public ActionResult Editar(int id)
+        {
+            using (CDRModel dbModel = new CDRModel())
+            {
+                return View(dbModel.Extension.Where(x => x.Id_Extension == id).FirstOrDefault());
+            }
         }
 
+        // POST: Extension/Edit
+        [HttpPost]
+        public ActionResult Editar(int id, Extension extension)
+        {
+            try
+            {
+                using (CDRModel dbModel = new CDRModel())
+                {
+                    dbModel.Entry(extension).State = EntityState.Modified;
+                    dbModel.SaveChanges();
+                }
+
+                    return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Extension/Delete
+        public ActionResult Eliminar(int id)
+        {
+            using (CDRModel dbModel = new CDRModel())
+            {
+                return View(dbModel.Extension.Where(x => x.Id_Extension == id).FirstOrDefault());
+            }
+        }
+
+        // POST: Extension/Delete
+        [HttpPost]
+        public ActionResult Eliminar(int id, Extension extension)
+        {
+            try
+            {
+                using (CDRModel dbModel = new CDRModel())
+                {
+                    extension = dbModel.Extension.Where(x => x.Id_Extension == id).FirstOrDefault();
+                    dbModel.Extension.Remove(extension);
+                    dbModel.SaveChanges();
+                }
+
+                    return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

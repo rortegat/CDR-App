@@ -1,34 +1,48 @@
-﻿@model CDRTools.Models.Extension
-@{
-    ViewData["Title"] = "Extensiones";
+﻿@model IEnumerable<CDRTools.Models.Extension>
+
+@{ViewBag.Title = "Extensiones"; }
+
+<h3>Administración de extensiones</h3>
+
+<button id="nuevo" class="btn btn-success">Crear Extensión</button>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Extension)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Extension_Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_Extension)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Extension_Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.Id_Extension}) |
+            @Html.ActionLink("Eliminar", "Eliminar", new { id=item.Id_Extension  })
+        </td>
+    </tr>
 }
 
-<h3>@ViewData["Message"]</h3>
+</table>
 
+@Html.ActionLink("Crear Extensión", "Crear")
 
-<button id="nuevaExt" class="btn btn-success">Nueva extensión</button>
-<button id="mostrarExt" class="btn btn-info">Ver extensiones</button>
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
-        $("#nuevaExt").click(function (e) {
-            e.preventDefault();
-            $.get('@Url.Action("Crear","Extension")', function (result) {
-                $('.body-content').html(result);
-            });
-        });
-
-        $("#mostrarExt").click(function (e) {
-            e.preventDefault();
-            $.get('@Url.Action("Mostrar","Extension")', function (result) {
-                $('.body-content').html(result);
-            });
-        });
-
-        $("#regresar").click(function (e) {
-            e.preventDefault();
-            $.get('@Url.Action("Index","Extension")', function (result) {
-                $('.body-content').html(result);
-            });
+    $('.nuevo').on('click', function (e) {
+        e.preventDefault();
+        $.get('@Url.Action("Crear","Extension")', function (result) {
+            $('.body-content').html(result);
         });
     });
+});
+    //Reporte/GetReport?page=1
 </script>
