@@ -15,7 +15,7 @@ namespace CDRTools.Controllers
         {
             using(CDRModel dbModel = new CDRModel())
 
-            return View(dbModel.Extension.ToList());
+            return View(dbModel.Extensions.ToList());
         }
 
         // GET: Extension/Create
@@ -31,7 +31,7 @@ namespace CDRTools.Controllers
             try
             {
                 using (CDRModel dbModel = new CDRModel()) {
-                    dbModel.Extension.Add(extension);
+                    dbModel.Extensions.Add(extension);
                     dbModel.SaveChanges();
                 }
 
@@ -48,7 +48,7 @@ namespace CDRTools.Controllers
         {
             using (CDRModel dbModel = new CDRModel())
             {
-                return View(dbModel.Extension.Where(x => x.Id_Extension == id).FirstOrDefault());
+                return View(dbModel.Extensions.Where(x => x.Id_Extension == id).FirstOrDefault());
             }
         }
 
@@ -77,7 +77,7 @@ namespace CDRTools.Controllers
         {
             using (CDRModel dbModel = new CDRModel())
             {
-                return View(dbModel.Extension.Where(x => x.Id_Extension == id).FirstOrDefault());
+                return View(dbModel.Extensions.Where(x => x.Id_Extension == id).FirstOrDefault());
             }
         }
 
@@ -89,8 +89,8 @@ namespace CDRTools.Controllers
             {
                 using (CDRModel dbModel = new CDRModel())
                 {
-                    extension = dbModel.Extension.Where(x => x.Id_Extension == id).FirstOrDefault();
-                    dbModel.Extension.Remove(extension);
+                    extension = dbModel.Extensions.Where(x => x.Id_Extension == id).FirstOrDefault();
+                    dbModel.Extensions.Remove(extension);
                     dbModel.SaveChanges();
                 }
 

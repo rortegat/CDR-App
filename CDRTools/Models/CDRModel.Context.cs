@@ -25,8 +25,8 @@ namespace CDRTools.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Autorizacion> Autorizacion { get; set; }
-        public virtual DbSet<Extension> Extension { get; set; }
-        public virtual DbSet<Llamada> Llamada { get; set; }
+        public virtual DbSet<Autorizacion> Autorizacions { get; set; }
+        public virtual DbSet<Extension> Extensions { get; set; }
+        public virtual DbSet<Llamada> Llamadas { get; set; }
     }
 }

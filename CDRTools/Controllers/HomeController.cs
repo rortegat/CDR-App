@@ -11,15 +11,6 @@ namespace CDRTools.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            bool sessionInit = Session["sessionInit"] == null ? false : (bool)Session["sessionInit"];
-
-            if (!sessionInit)
-            {
-                return RedirectToAction("Index", "Llamada");
-            }
-
-            ViewBag.Title = "Inicio";
-
             return View();
         }
     }

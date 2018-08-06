@@ -36,7 +36,12 @@
                 </button>
                 <span class="navbar-brand">CDRTools</span>
             </div>
-
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Actualizacion", "sideBar", "Llamada")</li>
+                <li>@Html.ActionLink("Reportes", "Index", "Reporte")</li>
+                <li>@Html.ActionLink("Configuracion", "ConfigMenu", "Settings")</li>
+                <li>@Html.ActionLink("Ext", "Index", "Extension")</li>
+            </ul>
 
             <div id="navbar" class="navbar-collapse collapse">
                 @if ((bool)ViewBag.sessionInit)
@@ -49,8 +54,9 @@
         </div>
     </nav>
 
-    
+    @RenderPage("~/Views/Llamada/_ReportesLlamada.cshtml");
 
+   
     <div id="bdy" class="container body-content">
         @RenderBody()
         <hr />
