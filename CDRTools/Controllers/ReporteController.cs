@@ -23,22 +23,11 @@ namespace CDRTools.Models
             return View("_Reports.Container");
         }
 
-        public ActionResult GetReporte(string reporte)
+
+        public ActionResult GetReporte(int id)
         {
-            LlamadasDBService llamadasService = new LlamadasDBService();
-
-            var data = llamadasService.Llamadas_Recupera(1);
-
-            var callDetailsCount = data.Item1;
-            var callDetails = data.Item2;
-
-            return View(callDetails);
-        }
-
-        public ActionResult GetReport(string reporte, int page)
-        {
-            int pageToLoad = page;
-
+            int pageToLoad = id;
+            
             if (pageToLoad == 0)
             {
                 pageToLoad = 1;
@@ -47,7 +36,7 @@ namespace CDRTools.Models
             LlamadasDBService llamadasService = new LlamadasDBService();
 
             var data = llamadasService.Llamadas_Recupera(pageToLoad);
-
+            
             var callDetailsCount = data.Item1;
             var callDetails = data.Item2;
 
@@ -59,7 +48,7 @@ namespace CDRTools.Models
                 Pager = pager
             };
 
-            return PartialView("GetReporte",viewModel);
+            return View(viewModel);
         }
 
         public FileResult CreateReport()

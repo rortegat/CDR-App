@@ -1,5 +1,4 @@
-﻿@using CDRTools.Models
-@model IndexViewModel
+﻿@model CDRTools.Models.IndexViewModel
 
 
 <div class="table-responsive">
@@ -29,28 +28,28 @@
         <ul class="pagination">
             @if (Model.Pager.CurrentPage > 1)
             {
-                <li onclick="conexion(1);">
-                    <a href=#>First</a>
+                <li>
+                    @Html.ActionLink("Primero", "GetReporte", "Reporte", new { id = 1 }, null)
                 </li>
-                <li onclick="conexion(@(Model.Pager.CurrentPage - 1));">
-                    <a href=#>Previous</a>
+                <li >
+                    @Html.ActionLink("Anterior", "GetReporte", "Reporte", new { id = @Model.Pager.CurrentPage-1 }, null)
                 </li>
             }
 
-            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-            {
-                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")" onclick="conexion(@page);">
-                    <a href="#">@page</a>
+                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                        {
+                            <li></li>
+                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                    <a href="@Url.Action("GetReporte","Reporte",new { id = @page})"> @page </a>
                 </li>}
 
             @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
             {
-                <li onclick="conexion(@(Model.Pager.CurrentPage + 1));">
-
-                    <a href=#>Next</a>
+                <li>
+                    @Html.ActionLink("Siguiente", "GetReporte", "Reporte", new { id = @Model.Pager.CurrentPage+1 }, null)
                 </li>
-                <li onclick="conexion(@(Model.Pager.TotalPages));">
-                    <a href=#>Last</a>
+                <li>
+                    @Html.ActionLink("Último", "GetReporte", "Reporte", new { id = @Model.Pager.TotalPages }, null)
                 </li>
             }
         </ul>
