@@ -339,13 +339,10 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Llamada\Index.cshtml" />
-    <Content Include="Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Views\Llamada\_Notifications.Modal.cshtml" />
     <Content Include="Views\Llamada\_Notifications.ModalPreview.cshtml" />
     <Content Include="Views\Llamada\_Notifications.js.cshtml" />
     <Content Include="Views\Reporte\Index.cshtml" />
-    <Content Include="Views\Reporte\_ReportesMenu.cshtml" />
-    <Content Include="Views\Reporte\_Reports.js.cshtml" />
     <Content Include="Views\Reporte\_Reports.Container.cshtml" />
     <Content Include="Views\Reporte\GetReporte.cshtml" />
     <Content Include="Views\Settings\_ConfigMenu.cshtml" />
@@ -353,7 +350,6 @@
     <Content Include="Views\Settings\_Seleccionar.cshtml" />
     <Content Include="Views\Settings\_LeerArchivo.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
-    <Content Include="Views\Llamada\_ReportesLlamada.cshtml" />
     <Content Include="Views\Extension\Index.cshtml" />
     <Content Include="Views\Extension\Crear.cshtml" />
     <Content Include="Views\Extension\Editar.cshtml" />

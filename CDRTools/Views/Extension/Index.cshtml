@@ -4,7 +4,8 @@
 
 <h3>Administración de extensiones</h3>
 
-<button id="nuevo" class="btn btn-success">Crear Extensión</button>
+@Html.ActionLink("Nueva extensión", "Crear", "Extension", null, new {  @class="btn btn-success btn-sm"})
+
 <table class="table table-hover">
     <tr>
         <th>
@@ -32,17 +33,3 @@
 }
 
 </table>
-
-@Html.ActionLink("Crear Extensión", "Crear")
-
-<script type="text/javascript">
-    $(document).ready(function () {
-    $('.nuevo').on('click', function (e) {
-        e.preventDefault();
-        $.get('@Url.Action("Crear","Extension")', function (result) {
-            $('.body-content').html(result);
-        });
-    });
-});
-    //Reporte/GetReport?page=1
-</script>

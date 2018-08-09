@@ -26,12 +26,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                @Html.ActionLink("Cancelar", "Index", "Extension", null, new { @class = "btn btn-danger" })
+                <input type="submit" value="Actualizar" class="btn btn-info" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Regresar", "Index")
-</div>
+

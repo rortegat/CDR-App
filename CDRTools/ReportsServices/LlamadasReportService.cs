@@ -84,43 +84,6 @@ namespace CDRTools.ReportsServices
             return result;
         }
 
-        //public static void CreaterPDF()
-        //{
-        //    LlamadasDBService llamadasService = new LlamadasDBService();
-
-        //    var data = llamadasService.Llamadas_Recupera(1);
-        //    var callDetails = data.Item2;
-
-        //    //file name to be created
-        //    var exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        //    var strPDFFileName = System.IO.Path.Combine(exportFolder, "SamplePDF.pdf");
-
-        //    using (var writer = new PdfWriter(strPDFFileName))
-        //    {
-        //        using (var pdf = new PdfDocument(writer))
-        //        {
-        //            var document = new Document(pdf,iText.Kernel.Geom.PageSize.LETTER);
-        //            document.SetMargins(20, 20, 20, 20);
-        //            var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-        //            var bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-
-        //            Table table = new Table(new float[] { 10, 1, 3, 4 });
-        //            table.SetWidth(iText.Layout.Properties.UnitValue.CreatePercentValue(100));
-
-        //            //process(table, line, bold, true);
-
-        //            foreach (var llamada in callDetails)
-        //            {
-        //                process(table, llamada, font, false);
-        //            }
-
-        //            document.Add(table);
-        //            document.Close();
-        //        }
-        //    }
-
-        //}
-
         private static void process(Table table, Llamada detail, PdfFont font,bool isHeader)
         {
             

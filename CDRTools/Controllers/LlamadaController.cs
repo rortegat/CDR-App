@@ -54,10 +54,5 @@ namespace CDRTools.Controllers
 
             return View();
         }
-
-        public ActionResult sideBar()
-        {
-            return View("_ReportesLlamada");
-        }
     }
 }
