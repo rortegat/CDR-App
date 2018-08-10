@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDRTools.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace CDRTools.Controllers
         // GET: Autorizacion
         public ActionResult Index()
         {
-            return View();
+            using (CDRModel dbModel = new CDRModel())
+
+                return View(dbModel.Autorizacions.ToList());
         }
 
         // GET: Autorizacion/Details/5
@@ -28,11 +31,15 @@ namespace CDRTools.Controllers
 
         // POST: Autorizacion/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Autorizacion autorizacion)
         {
             try
             {
-                // TODO: Add insert logic here
+                using (CDRModel dbModel = new CDRModel())
+                {
+                    dbModel.Autorizacions.Add(autorizacion);
+                    dbModel.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
@@ -45,16 +52,24 @@ namespace CDRTools.Controllers
         // GET: Autorizacion/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            using (CDRModel dbModel = new CDRModel())
+            {
+               
+                return View(dbModel.Autorizacions.Where(x => x.Autorizacion_Codigo == id).FirstOrDefault());
+            }
         }
 
         // POST: Autorizacion/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Autorizacion autorizacion)
         {
             try
             {
-                // TODO: Add update logic here
+                using (CDRModel dbModel = new CDRModel())
+                {
+                    dbModel.Entry(autorizacion).State = EntityState.Modified;
+                    dbModel.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }

@@ -6,19 +6,31 @@ using System.Web.Mvc;
 using System.IO;
 using System.Web.Hosting;
 using CDRTools.DBServices;
-using CDRTools.ReportsServices;
+
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml.pipeline.html;
+using iTextSharp.tool.xml.pipeline.end;
+using iTextSharp.text.html;
+using System.Text;
+using iTextSharp.tool.xml.parser;
 
 namespace CDRTools.Models
 {
     public class ReporteController : Controller
     {
+
+
         // GET: Reporte
         public ActionResult Index()
         {
-            return View();
+                return View();         
         }
 
-        public ActionResult Container()
+       public ActionResult Container()
         {
             return View("_Reports.Container");
         }
@@ -50,22 +62,55 @@ namespace CDRTools.Models
 
             return View(viewModel);
         }
-
-        public FileResult CreateReport()
+        /*
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Export(string GridHtml)
         {
-            DateTime dTime = DateTime.Now;  
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "Tabla.pdf");
+            }
+        }*/
 
-            MemoryStream workStream = new MemoryStream();
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Export(string GridHtml)
+        {
+            List<string> cssFiles = new List<string>();
+            cssFiles.Add(@"/Content/bootstrap.css");
 
-            byte[] result = LlamadasReportService.CreatePDF();
+            var output = new MemoryStream();
 
-            workStream.Write(result, 0, result.Length);
-            workStream.Position = 0;
+            var input = new MemoryStream(Encoding.UTF8.GetBytes(GridHtml));
 
-            var strPDFFileName = string.Format("SamplePDF" + "-" + dTime.ToString("yyyyMMdd") + ".pdf");
-            var exportFolder = HostingEnvironment.MapPath("~/Downloads/" + strPDFFileName);
+            var document = new Document();
+            var writer = PdfWriter.GetInstance(document, output);
+            writer.CloseStream = false;
 
-            return File(workStream, "application/pdf", strPDFFileName);
+            document.Open();
+            var htmlContext = new HtmlPipelineContext(null);
+            htmlContext.SetTagFactory(iTextSharp.tool.xml.html.Tags.GetHtmlTagProcessorFactory());
+
+            ICSSResolver cssResolver = XMLWorkerHelper.GetInstance().GetDefaultCssResolver(false);
+            cssFiles.ForEach(i => cssResolver.AddCssFile(System.Web.HttpContext.Current.Server.MapPath(i), true));
+
+            var pipeline = new CssResolverPipeline(cssResolver, new HtmlPipeline(htmlContext, new PdfWriterPipeline(document, writer)));
+            var worker = new XMLWorker(pipeline, true);
+            var p = new XMLParser(worker);
+            p.Parse(input);
+            document.Close();
+            output.Position = 0;
+
+            return File(output.ToArray(), "application/pdf", "Reporte.pdf");
+            
         }
+        
     }
 }

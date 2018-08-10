@@ -96,6 +96,14 @@
       <HintPath>..\packages\itext7.7.1.0\lib\net40\itext.sign.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -327,7 +335,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DBServices\ExtensionesDBService.cs" />
     <Compile Include="DBServices\LlamadasDBService.cs" />
-    <Compile Include="ReportsServices\LlamadasReportService.cs" />
     <Compile Include="Models\PaginationService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -342,7 +349,6 @@
     <Content Include="Views\Llamada\_Notifications.Modal.cshtml" />
     <Content Include="Views\Llamada\_Notifications.ModalPreview.cshtml" />
     <Content Include="Views\Llamada\_Notifications.js.cshtml" />
-    <Content Include="Views\Reporte\Index.cshtml" />
     <Content Include="Views\Reporte\_Reports.Container.cshtml" />
     <Content Include="Views\Reporte\GetReporte.cshtml" />
     <Content Include="Views\Settings\_ConfigMenu.cshtml" />
@@ -354,6 +360,8 @@
     <Content Include="Views\Extension\Crear.cshtml" />
     <Content Include="Views\Extension\Editar.cshtml" />
     <Content Include="Views\Extension\Eliminar.cshtml" />
+    <Content Include="Views\Autorizacion\Index.cshtml" />
+    <Content Include="Views\Autorizacion\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -363,7 +371,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Autorizacion\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -2,12 +2,12 @@
 
 @{ViewBag.Title = "Extensiones"; }
 
-<h3>Administración de extensiones</h3>
+<h2>Administración de extensiones</h2>
 
 @Html.ActionLink("Nueva extensión", "Crear", "Extension", null, new {  @class="btn btn-success btn-sm"})
 
-<table class="table table-hover">
-    <tr>
+<table class="table table-hover table-bordered">
+    <tr style="color: white; background: #008cba">
         <th>
             @Html.DisplayNameFor(model => model.Id_Extension)
         </th>
