@@ -7,6 +7,7 @@ namespace CDRTools.Models
 {
     public class IndexViewModel
     {
+        public IEnumerable<Extension> extensiones { get; set;}
         public IEnumerable<Llamada> Llamadas { get; set; }
         public Pager Pager { get; set; }
     }

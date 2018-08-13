@@ -1,10 +1,9 @@
-﻿using CDRTools.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using CDRTools.Models;
 namespace CDRTools.Controllers
 {
     public class AutorizacionController : Controller
@@ -17,21 +16,17 @@ namespace CDRTools.Controllers
                 return View(dbModel.Autorizacions.ToList());
         }
 
-        // GET: Autorizacion/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+  
 
         // GET: Autorizacion/Create
-        public ActionResult Create()
+        public ActionResult Crear()
         {
             return View();
         }
 
         // POST: Autorizacion/Create
         [HttpPost]
-        public ActionResult Create(Autorizacion autorizacion)
+        public ActionResult Crear(Autorizacion autorizacion)
         {
             try
             {
@@ -50,26 +45,18 @@ namespace CDRTools.Controllers
         }
 
         // GET: Autorizacion/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Editar(int id)
         {
-            using (CDRModel dbModel = new CDRModel())
-            {
-               
-                return View(dbModel.Autorizacions.Where(x => x.Autorizacion_Codigo == id).FirstOrDefault());
-            }
+            return View();
         }
 
         // POST: Autorizacion/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Autorizacion autorizacion)
+        public ActionResult Editar(int id, FormCollection collection)
         {
             try
             {
-                using (CDRModel dbModel = new CDRModel())
-                {
-                    dbModel.Entry(autorizacion).State = EntityState.Modified;
-                    dbModel.SaveChanges();
-                }
+                // TODO: Add update logic here
 
                 return RedirectToAction("Index");
             }
@@ -80,18 +67,27 @@ namespace CDRTools.Controllers
         }
 
         // GET: Autorizacion/Delete/5
-        public ActionResult Delete(int id)
+      
+        public ActionResult Eliminar(string id)
         {
-            return View();
+            using (CDRModel dbModel = new CDRModel())
+            {
+                return View(dbModel.Autorizacions.Where(x => x.Id_Autorizacion == id).FirstOrDefault());
+            }
         }
 
-        // POST: Autorizacion/Delete/5
+        // POST: Extension/Delete
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Eliminar(string id, Autorizacion autorizacion)
         {
             try
             {
-                // TODO: Add delete logic here
+                using (CDRModel dbModel = new CDRModel())
+                {
+                    autorizacion = dbModel.Autorizacions.Where(x => x.Id_Autorizacion == id).FirstOrDefault();
+                    dbModel.Autorizacions.Remove(autorizacion);
+                    dbModel.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }

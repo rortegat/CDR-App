@@ -62,22 +62,6 @@ namespace CDRTools.Models
 
             return View(viewModel);
         }
-        /*
-        [HttpPost]
-        [ValidateInput(false)]
-        public FileResult Export(string GridHtml)
-        {
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                StringReader sr = new StringReader(GridHtml);
-                Document pdfDoc = new Document(PageSize.A4, 25, 25, 30, 30);
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "Tabla.pdf");
-            }
-        }*/
 
         [HttpPost]
         [ValidateInput(false)]

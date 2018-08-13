@@ -1,18 +1,20 @@
 ﻿@model IEnumerable<CDRTools.Models.Autorizacion>
 
-<h2>Códigos de Autorización</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Crear")
 </p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Autorizacion_Codigo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Extensione.Extension_Descripcion)
+            @Html.DisplayNameFor(model => model.Id_Autorizacion)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Extension)
+        </th>
+        
         <th></th>
     </tr>
 
@@ -22,12 +24,16 @@
             @Html.DisplayFor(modelItem => item.Autorizacion_Codigo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Extensione.Extension_Descripcion)
+            @Html.DisplayFor(modelItem => item.Id_Autorizacion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Autorizacion }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_Autorizacion }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Autorizacion })
+            @Html.DisplayFor(modelItem => item.Id_Extension)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.Id_Autorizacion }) |
+           
+            @Html.ActionLink("Eliminar", "Eliminar", new { id=item.Id_Autorizacion })
         </td>
     </tr>
 }
