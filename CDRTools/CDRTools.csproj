@@ -304,6 +304,7 @@
     <Compile Include="Controllers\LlamadaController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="DBServices\FilterDBService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -329,7 +330,15 @@
     <Compile Include="Models\Extension.cs">
       <DependentUpon>CDRModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extensiones_Recupera_Result.cs">
+      <DependentUpon>CDRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ext_Model.cs" />
+    <Compile Include="Models\Get_Llamadas_Extensiones.cs" />
     <Compile Include="Models\Llamada.cs">
+      <DependentUpon>CDRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Llamadas_Filtro_Result.cs">
       <DependentUpon>CDRModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ParentViewModel.cs" />
@@ -364,6 +373,9 @@
     <Content Include="Views\Autorizacion\Index.cshtml" />
     <Content Include="Views\Autorizacion\Crear.cshtml" />
     <Content Include="Views\Autorizacion\Eliminar.cshtml" />
+    <Content Include="Views\Reporte\_SelectReport.cshtml" />
+    <Content Include="Views\Extension\_ExtModal.cshtml" />
+    <Content Include="Views\Reporte\_ShowData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

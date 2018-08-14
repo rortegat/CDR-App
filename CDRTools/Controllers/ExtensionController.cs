@@ -10,6 +10,16 @@ namespace CDRTools.Controllers
 {
     public class ExtensionController : Controller
     {
+
+        public ActionResult _ExtModal()
+        {
+            Ext_Model mod = new Ext_Model();
+            List<Extension> result = mod.GetExtensiones();
+            return PartialView(result);
+        }
+
+
+
         // GET: Extension
         public ActionResult Index()
         {
@@ -44,7 +54,7 @@ namespace CDRTools.Controllers
         }
 
         // GET: Extension/Edit
-        public ActionResult Editar(int id)
+        public ActionResult Editar(string id)
         {
             using (CDRModel dbModel = new CDRModel())
             {
@@ -73,7 +83,7 @@ namespace CDRTools.Controllers
         }
 
         // GET: Extension/Delete
-        public ActionResult Eliminar(int id)
+        public ActionResult Eliminar(string id)
         {
             using (CDRModel dbModel = new CDRModel())
             {
@@ -83,7 +93,7 @@ namespace CDRTools.Controllers
 
         // POST: Extension/Delete
         [HttpPost]
-        public ActionResult Eliminar(int id, Extension extension)
+        public ActionResult Eliminar(string id, Extension extension)
         {
             try
             {
@@ -101,5 +111,8 @@ namespace CDRTools.Controllers
                 return View();
             }
         }
+
+        
+
     }
 }

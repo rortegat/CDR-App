@@ -12,6 +12,8 @@ namespace CDRTools.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class CDRModel : DbContext
     {
@@ -28,5 +30,37 @@ namespace CDRTools.Models
         public virtual DbSet<Autorizacion> Autorizacions { get; set; }
         public virtual DbSet<Extension> Extensions { get; set; }
         public virtual DbSet<Llamada> Llamadas { get; set; }
+    
+        public virtual ObjectResult<Extensiones_Recupera_Result> Extensiones_Recupera()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Extensiones_Recupera_Result>("Extensiones_Recupera");
+        }
+    
+        public virtual ObjectResult<Llamadas_Filtro_Result> Llamadas_Filtro(Nullable<System.DateTime> dataINI, Nullable<System.DateTime> dataFIN, string extList)
+        {
+            var dataINIParameter = dataINI.HasValue ?
+                new ObjectParameter("dataINI", dataINI) :
+                new ObjectParameter("dataINI", typeof(System.DateTime));
+    
+            var dataFINParameter = dataFIN.HasValue ?
+                new ObjectParameter("dataFIN", dataFIN) :
+                new ObjectParameter("dataFIN", typeof(System.DateTime));
+    
+            var extListParameter = extList != null ?
+                new ObjectParameter("extList", extList) :
+                new ObjectParameter("extList", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Llamadas_Filtro_Result>("Llamadas_Filtro", dataINIParameter, dataFINParameter, extListParameter);
+        }
+    
+        public virtual ObjectResult<Extension> FN_Extensiones_Recupera()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Extension>("FN_Extensiones_Recupera");
+        }
+    
+        public virtual ObjectResult<Extension> FN_Extensiones_Recupera(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Extension>("FN_Extensiones_Recupera", mergeOption);
+        }
     }
 }

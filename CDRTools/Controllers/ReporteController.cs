@@ -17,6 +17,8 @@ using iTextSharp.tool.xml.pipeline.end;
 using iTextSharp.text.html;
 using System.Text;
 using iTextSharp.tool.xml.parser;
+using System.Data;
+using System.Collections.ObjectModel;
 
 namespace CDRTools.Models
 {
@@ -95,6 +97,57 @@ namespace CDRTools.Models
             return File(output.ToArray(), "application/pdf", "Reporte.pdf");
             
         }
+
+
+
         
+
+        public ActionResult _ShowData(string ini, string fin, string ex)
+        {
+
+            DBServices.FilterDBService dblayer = new DBServices.FilterDBService();
+
+            string i = ini;
+            string f = fin;
+            string e = ex;
+            DataSet ds = dblayer.Show_data(i, f, e);
+            ViewBag.emp = ds.Tables[0];
+
+            ObservableCollection<Get_Llamadas_Extensiones> modeldata = new ObservableCollection<Get_Llamadas_Extensiones>();
+
+            foreach (System.Data.DataRow dr in ViewBag.emp.Rows)
+            {
+                modeldata.Add(new Get_Llamadas_Extensiones
+                {
+
+                    globalCallID_callManagerId = Convert.ToInt32(dr["globalCallID_callManagerId"]),
+                    globalCallID_callId = Convert.ToInt32(dr["globalCallID_callId"]),
+                    dateTimeOrigination = Convert.ToDateTime(dr["dateTimeOrigination"]),
+                    callingPartyNumber = dr["callingPartyNumber"].ToString(),
+                    Extension_Descripcion = dr["Extension_Descripcion"].ToString(),
+                    originalCalledPartyNumber = dr["originalCalledPartyNumber"].ToString(),
+                    duration = Convert.ToInt32(dr["duration"])
+                });
+            }
+            return View(modeldata);
+        }
+
+
+        public ActionResult _SelectReport()
+        {
+            ObservableCollection<Filtro> inventoryList = new ObservableCollection<Filtro>();
+            inventoryList.Add(new Filtro { NameReport = "Reporte 1", DescriptionReport = "Computer", ReportDefinicion = "All type of computers", Actions = "800" });
+            inventoryList.Add(new Filtro { NameReport = "Reporte 2", DescriptionReport = "Laptop", ReportDefinicion = "All models of Laptops", Actions = "500" });
+            inventoryList.Add(new Filtro { NameReport = "Reporte 3", DescriptionReport = "Camera", ReportDefinicion = "Hd  cameras", Actions = "300" });
+            inventoryList.Add(new Filtro { NameReport = "Reporte 4", DescriptionReport = "Mobile", ReportDefinicion = "All Smartphones", Actions = "450" });
+            inventoryList.Add(new Filtro { NameReport = "Reporte 5", DescriptionReport = "Notepad", ReportDefinicion = "All branded of notepads", Actions = "670" });
+            inventoryList.Add(new Filtro { NameReport = "Reporte 6", DescriptionReport = "Harddisk", ReportDefinicion = "All type of Harddisk", Actions = "1200" });
+            inventoryList.Add(new Filtro { NameReport = "Reporte 7", DescriptionReport = "PenDrive", ReportDefinicion = "All type of Pendrive", Actions = "370" });
+            return View(inventoryList);
+        }
+
+
+
+
     }
 }

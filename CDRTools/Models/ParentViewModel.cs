@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CDRTools.Models
 {
@@ -10,6 +11,5 @@ namespace CDRTools.Models
         
         public Autorizacion aut { get; set; }
         public IEnumerable<Extension> enumExt { get; set; }
-        public Extension ext { get; set; }
     }
 }

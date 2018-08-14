@@ -4,11 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b2630d6c395f414d8df97428f29643ee" Name="Diagram1">
-        <EntityTypeShape EntityType="CDRRecordsModel.Autorizacion" Width="1.5" PointX="3.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CDRRecordsModel.Extension" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CDRRecordsModel.Llamada" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
-        <AssociationConnector Association="CDRRecordsModel.fk_Autorizacion_Id_Extension" ManuallyRouted="false" />
+      <Diagram DiagramId="e94a6197c50641b8909079f80b881b62" Name="Diagram1">
+        <EntityTypeShape EntityType="CDRRecordsModel.Autorizacion" Width="1.5" PointX="2.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CDRRecordsModel.Extension" Width="1.5" PointX="0.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CDRRecordsModel.Llamada" Width="1.5" PointX="2.625" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="CDRRecordsModel.FK_Autorizaciones_Extensiones" ManuallyRouted="false" />
+        <AssociationConnector Association="CDRRecordsModel.FK_Llamadas_Extensiones" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

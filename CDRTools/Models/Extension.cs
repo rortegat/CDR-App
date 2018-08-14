@@ -18,12 +18,15 @@ namespace CDRTools.Models
         public Extension()
         {
             this.Autorizaciones = new HashSet<Autorizacion>();
+            this.Llamadas = new HashSet<Llamada>();
         }
     
-        public int Id_Extension { get; set; }
+        public string Id_Extension { get; set; }
         public string Extension_Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Autorizacion> Autorizaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Llamada> Llamadas { get; set; }
     }
 }

@@ -10,17 +10,15 @@
 namespace CDRTools.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Llamada
+    public partial class Llamadas_Filtro_Result
     {
         public int globalCallID_callManagerId { get; set; }
         public int globalCallID_callId { get; set; }
         public System.DateTime dateTimeOrigination { get; set; }
         public string callingPartyNumber { get; set; }
+        public string Extension_Descripcion { get; set; }
         public string originalCalledPartyNumber { get; set; }
         public int duration { get; set; }
-    
-        public virtual Extension Extensione { get; set; }
     }
 }

@@ -3,6 +3,53 @@
     padding-bottom: 20px;
 }
 
+
+/*Popup*/
+#well-mod{
+  width: 100%;
+  height: 400px;
+  overflow-y: auto;     
+}
+
+.ext-flex{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.bext
+{
+   display: flex;
+   flex-direction:column;
+   margin: 5px;
+   width: 100%; 
+}
+.bext>div{
+  margin: 3px;
+  
+}
+
+.srch{
+  display: flex;
+   flex-direction:column;
+   margin: 5px;
+   width: 100%;
+}
+
+.adding{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  width: 100%;
+}
+.adding>div{
+  margin: 3px;
+}
+
+
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

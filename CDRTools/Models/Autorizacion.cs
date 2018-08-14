@@ -11,16 +11,12 @@ namespace CDRTools.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Autorizacion
     {
-        [Key]
         public string Id_Autorizacion { get; set; }
-        public int Autorizacion_Codigo { get; set; }
-        [ForeignKey("Id_Extension")]
-        public int Id_Extension { get; set; }
+        public Nullable<int> Autorizacion_Codigo { get; set; }
+        public string Id_Extension { get; set; }
     
         public virtual Extension Extensione { get; set; }
     }

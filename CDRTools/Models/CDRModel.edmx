@@ -4,20 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CDRRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CDRRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Autorizaciones">
           <Key>
             <PropertyRef Name="Id_Autorizacion" />
           </Key>
-          <Property Name="Id_Autorizacion" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Autorizacion_Codigo" Type="int" Nullable="false" />
-          <Property Name="Id_Extension" Type="int" Nullable="false" />
+          <Property Name="Id_Autorizacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Autorizacion_Codigo" Type="int" />
+          <Property Name="Id_Extension" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Extensiones">
           <Key>
             <PropertyRef Name="Id_Extension" />
           </Key>
-          <Property Name="Id_Extension" Type="int" Nullable="false" />
+          <Property Name="Id_Extension" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Extension_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -38,7 +38,7 @@ warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary k
           <Property Name="originalCalledPartyNumber" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="duration" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="fk_Autorizacion_Id_Extension">
+        <Association Name="FK_Autorizaciones_Extensiones">
           <End Role="Extensiones" Type="Self.Extensiones" Multiplicity="1" />
           <End Role="Autorizaciones" Type="Self.Autorizaciones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -50,6 +50,24 @@ warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Llamadas_Extensiones">
+          <End Role="Extensiones" Type="Self.Extensiones" Multiplicity="1" />
+          <End Role="Llamadas" Type="Self.Llamadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extensiones">
+              <PropertyRef Name="Id_Extension" />
+            </Principal>
+            <Dependent Role="Llamadas">
+              <PropertyRef Name="callingPartyNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Extensiones_Recupera" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Llamadas_Filtro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dataINI" Type="datetime" Mode="In" />
+          <Parameter Name="dataFIN" Type="datetime" Mode="In" />
+          <Parameter Name="extList" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="CDRRecordsModelStoreContainer">
           <EntitySet Name="Autorizaciones" EntityType="Self.Autorizaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Extensiones" EntityType="Self.Extensiones" Schema="dbo" store:Type="Tables" />
@@ -63,13 +81,16 @@ warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary k
     [Llamadas].[duration] AS [duration]
     FROM [dbo].[Llamadas] AS [Llamadas]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="fk_Autorizacion_Id_Extension" Association="Self.fk_Autorizacion_Id_Extension">
+          <AssociationSet Name="FK_Autorizaciones_Extensiones" Association="Self.FK_Autorizaciones_Extensiones">
             <End Role="Extensiones" EntitySet="Extensiones" />
             <End Role="Autorizaciones" EntitySet="Autorizaciones" />
           </AssociationSet>
+          <AssociationSet Name="FK_Llamadas_Extensiones" Association="Self.FK_Llamadas_Extensiones">
+            <End Role="Extensiones" EntitySet="Extensiones" />
+            <End Role="Llamadas" EntitySet="Llamadas" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CDRRecordsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -77,18 +98,19 @@ warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary k
           <Key>
             <PropertyRef Name="Id_Autorizacion" />
           </Key>
-          <Property Name="Id_Autorizacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Autorizacion_Codigo" Type="Int32" Nullable="false" />
-          <Property Name="Id_Extension" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Extensione" Relationship="Self.fk_Autorizacion_Id_Extension" FromRole="Autorizaciones" ToRole="Extensiones" />
+          <Property Name="Id_Autorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Autorizacion_Codigo" Type="Int32" />
+          <Property Name="Id_Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Extensione" Relationship="Self.FK_Autorizaciones_Extensiones" FromRole="Autorizaciones" ToRole="Extensiones" />
         </EntityType>
         <EntityType Name="Extension">
           <Key>
             <PropertyRef Name="Id_Extension" />
           </Key>
-          <Property Name="Id_Extension" Type="Int32" Nullable="false" />
+          <Property Name="Id_Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Extension_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Autorizaciones" Relationship="Self.fk_Autorizacion_Id_Extension" FromRole="Extensiones" ToRole="Autorizaciones" />
+          <NavigationProperty Name="Autorizaciones" Relationship="Self.FK_Autorizaciones_Extensiones" FromRole="Extensiones" ToRole="Autorizaciones" />
+          <NavigationProperty Name="Llamadas" Relationship="Self.FK_Llamadas_Extensiones" FromRole="Extensiones" ToRole="Llamadas" />
         </EntityType>
         <EntityType Name="Llamada">
           <Key>
@@ -105,8 +127,9 @@ warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary k
           <Property Name="callingPartyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="originalCalledPartyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="duration" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Extensione" Relationship="Self.FK_Llamadas_Extensiones" FromRole="Llamadas" ToRole="Extensiones" />
         </EntityType>
-        <Association Name="fk_Autorizacion_Id_Extension">
+        <Association Name="FK_Autorizaciones_Extensiones">
           <End Role="Extensiones" Type="CDRRecordsModel.Extension" Multiplicity="1" />
           <End Role="Autorizaciones" Type="CDRRecordsModel.Autorizacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -118,21 +141,57 @@ warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CDRModel" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Llamadas_Extensiones">
+          <End Role="Extensiones" Type="CDRRecordsModel.Extension" Multiplicity="1" />
+          <End Role="Llamadas" Type="Self.Llamada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Extensiones">
+              <PropertyRef Name="Id_Extension" />
+            </Principal>
+            <Dependent Role="Llamadas">
+              <PropertyRef Name="callingPartyNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CDRRecordsEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Autorizacions" EntityType="CDRRecordsModel.Autorizacion" />
           <EntitySet Name="Extensions" EntityType="CDRRecordsModel.Extension" />
           <EntitySet Name="Llamadas" EntityType="Self.Llamada" />
-          <AssociationSet Name="fk_Autorizacion_Id_Extension" Association="Self.fk_Autorizacion_Id_Extension">
+          <AssociationSet Name="FK_Autorizaciones_Extensiones" Association="Self.FK_Autorizaciones_Extensiones">
             <End Role="Extensiones" EntitySet="Extensions" />
             <End Role="Autorizaciones" EntitySet="Autorizacions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Llamadas_Extensiones" Association="Self.FK_Llamadas_Extensiones">
+            <End Role="Extensiones" EntitySet="Extensions" />
+            <End Role="Llamadas" EntitySet="Llamadas" />
+          </AssociationSet>
+          <FunctionImport Name="Extensiones_Recupera" ReturnType="Collection(CDRRecordsModel.Extensiones_Recupera_Result)" />
+          <FunctionImport Name="Llamadas_Filtro" ReturnType="Collection(CDRRecordsModel.Llamadas_Filtro_Result)">
+            <Parameter Name="dataINI" Mode="In" Type="DateTime" />
+            <Parameter Name="dataFIN" Mode="In" Type="DateTime" />
+            <Parameter Name="extList" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FN_Extensiones_Recupera" EntitySet="Extensions" ReturnType="Collection(CDRRecordsModel.Extension)" />
         </EntityContainer>
+        <ComplexType Name="Extensiones_Recupera_Result">
+          <Property Type="String" Name="Id_Extension" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Extension_Descripcion" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Llamadas_Filtro_Result">
+          <Property Type="Int32" Name="globalCallID_callManagerId" Nullable="false" />
+          <Property Type="Int32" Name="globalCallID_callId" Nullable="false" />
+          <Property Type="DateTime" Name="dateTimeOrigination" Nullable="false" Precision="23" />
+          <Property Type="String" Name="callingPartyNumber" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Extension_Descripcion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="originalCalledPartyNumber" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="duration" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CDRRecordsModelStoreContainer" CdmEntityContainer="CDRModel">
+        <EntityContainerMapping StorageEntityContainer="CDRRecordsModelStoreContainer" CdmEntityContainer="CDRRecordsEntities1">
           <EntitySetMapping Name="Autorizacions">
             <EntityTypeMapping TypeName="CDRRecordsModel.Autorizacion">
               <MappingFragment StoreEntitySet="Autorizaciones">
@@ -162,6 +221,28 @@ warning 6002: The table/view 'CDRRecords.dbo.Llamadas' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Extensiones_Recupera" FunctionName="CDRRecordsModel.Store.Extensiones_Recupera">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CDRRecordsModel.Extensiones_Recupera_Result">
+                <ScalarProperty Name="Id_Extension" ColumnName="Id_Extension" />
+                <ScalarProperty Name="Extension_Descripcion" ColumnName="Extension_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Llamadas_Filtro" FunctionName="CDRRecordsModel.Store.Llamadas_Filtro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CDRRecordsModel.Llamadas_Filtro_Result">
+                <ScalarProperty Name="globalCallID_callManagerId" ColumnName="globalCallID_callManagerId" />
+                <ScalarProperty Name="globalCallID_callId" ColumnName="globalCallID_callId" />
+                <ScalarProperty Name="dateTimeOrigination" ColumnName="dateTimeOrigination" />
+                <ScalarProperty Name="callingPartyNumber" ColumnName="callingPartyNumber" />
+                <ScalarProperty Name="Extension_Descripcion" ColumnName="Extension_Descripcion" />
+                <ScalarProperty Name="originalCalledPartyNumber" ColumnName="originalCalledPartyNumber" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FN_Extensiones_Recupera" FunctionName="CDRRecordsModel.Store.Extensiones_Recupera" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

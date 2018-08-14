@@ -38,7 +38,7 @@ namespace CDRTools.DBServices
                         listExtensiones.Add(
                             new Extension
                             {
-                                Id_Extension = Convert.ToInt32(DataReader["Id_Extension"]),
+                                Id_Extension = Convert.ToString(DataReader["Id_Extension"]),
                                 Extension_Descripcion = Convert.ToString(DataReader["Extension_Descripcion"])
                             });
                     }
