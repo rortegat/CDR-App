@@ -16,23 +16,33 @@ namespace CDRTools.Controllers
                 return View(dbModel.Autorizacions.ToList());
         }
 
-  
 
+
+
+       
         // GET: Autorizacion/Create
         public ActionResult Crear()
         {
-            return View();
+            CDRModel dbModel = new CDRModel();
+                var viewModel = new ParentViewModel(dbModel.Extensions);
+
+            return View(viewModel);
+
         }
 
+        
+
         // POST: Autorizacion/Create
-        [HttpPost]
-        public ActionResult Crear(Autorizacion autorizacion)
+        //[HttpPost]
+        public ActionResult CrearAutorizacion(string id_autorizacion, int codigo, string id_extension)
         {
+            var nuevo = new Autorizacion() {Id_Autorizacion = id_autorizacion, Autorizacion_Codigo = codigo, Id_Extension = id_extension };
+
             try
             {
                 using (CDRModel dbModel = new CDRModel())
                 {
-                    dbModel.Autorizacions.Add(autorizacion);
+                    dbModel.Autorizacions.Add(nuevo);
                     dbModel.SaveChanges();
                 }
 
@@ -67,7 +77,7 @@ namespace CDRTools.Controllers
         }
 
         // GET: Autorizacion/Delete/5
-      
+
         public ActionResult Eliminar(string id)
         {
             using (CDRModel dbModel = new CDRModel())
@@ -95,6 +105,22 @@ namespace CDRTools.Controllers
             {
                 return View();
             }
+        }
+
+
+
+        public static IEnumerable<SelectListItem> ListaExtensiones()
+        {
+            IList<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "California", Value = "B"},
+                new SelectListItem{Text = "Alaska", Value = "B"},
+                new SelectListItem{Text = "Illinois", Value = "B"},
+                new SelectListItem{Text = "Texas", Value = "B"},
+                new SelectListItem{Text = "Washington", Value = "B"}
+
+            };
+            return items;
         }
     }
 }

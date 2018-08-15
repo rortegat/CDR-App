@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +16,8 @@ namespace CDRTools.Models
             return cdrdb.FN_Extensiones_Recupera().ToList();
         }
     }
+
+    
 
     public class Filtro
     {

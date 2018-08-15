@@ -35,40 +35,13 @@
                                 <input id="f2" class="form-control" type="date" name="fecha" style="display:none">
                             </div>
                         </div>
-                        @*<div class="form-group">
-                                <p>Rango de tiempo:</p>
-                                <label class="radio-inline"><input type="radio" name="optradio" checked>Todo el dia</label>
-                                <label class="radio-inline"><input type="radio" name="optradio">Cutom</label>
-                            </div>*@
+                       
                         <br /><br /><br /><hr />
                         <p>Extenciones:</p>
-                        @*<div class="container">
-                                <div class="row">
-
-                                    <div class="form-group col-xs-6">
-                                        <label class="control-label">
-                                            <code>.inner-addon.<i>left</i>-addon</code>
-                                        </label>
-                                        <div class="inner-addon left-addon">
-                                            <i class="glyphicon glyphicon-user"></i>
-                                            <input type="text" class="form-control" placeholder="Username" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-xs-6">
-                                        <label class="control-label">
-                                            <code>.inner-addon.<i>right</i>-addon</code>
-                                        </label>
-                                        <div class="inner-addon right-addon">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                            <input type="text" class="form-control" placeholder="Search" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
+                  
 
                         <div class="ext-flex">
-                            @*@model IEnumerable<CDRTools.Models.Extensione>*@
+                           
                             <div class="bext">
                                 <div class="srch">
                                     <input id="myInput" type="text" class="form-control" placeholder="Search" />
@@ -120,36 +93,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @*Prueba 2*@
-
-
-                        @*<div class="ext-flex">
-                            <div class="srch">
-                                <select multiple="multiple" id='lstBox1' class="form-control" size="8">
-                                    @foreach (var item in Model)
-                                    {
-
-                                        <option>
-                                            @Html.DisplayFor(modelItem => item.Id_Extension)
-                                            @Html.DisplayFor(modelItem => item.Extension_Descripcion)
-                                        </option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="adding">
-                                <input type="button" id="btnAllRight" value=">>" class="btn btn-default" /><br />
-                                <input type="button" id="btnRight" value=">" class="btn btn-default" /><br />
-                                <input type="button" id="btnLeft" value="<" class="btn btn-default" /><br />
-                                <input type="button" id="btnAllLeft" value="<<" class="btn btn-default" />
-                            </div>
-                            <div class="srch">
-                                <select multiple="multiple" id='lstBox2' class="form-control" size="8"></select>
-                            </div>
-
-                        </div>*@
-
-                        @*Prueba 2*@
 
                     </div>
                 </div>

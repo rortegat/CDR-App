@@ -62,5 +62,6 @@ namespace CDRTools.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Extension>("FN_Extensiones_Recupera", mergeOption);
         }
+
     }
 }
