@@ -100,10 +100,16 @@
     padding: 10px;
 }
 
-#sidebar-wrapper ul li a{
+#sidebar-wrapper ul li a {
     padding: 10px;
-    font-size: 1em;
+    font-size: 1.5em;
     display: block;
+}
+
+#sidebar-wrapper ul li a span{
+    padding: 10px;
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .custom-li {

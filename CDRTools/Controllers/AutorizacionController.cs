@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CDRTools.Models;
+using System.Data.Entity;
+
 namespace CDRTools.Controllers
 {
     public class AutorizacionController : Controller
@@ -55,20 +57,26 @@ namespace CDRTools.Controllers
         }
 
         // GET: Autorizacion/Edit/5
-        public ActionResult Editar(int id)
+        public ActionResult Editar(string id)
         {
-            return View();
+            using (CDRModel dbModel = new CDRModel())
+            {
+                return View(dbModel.Autorizacions.Where(x => x.Id_Autorizacion == id).FirstOrDefault());
+            }
         }
 
         // POST: Autorizacion/Edit/5
         [HttpPost]
-        public ActionResult Editar(int id, FormCollection collection)
+        public ActionResult Editar(string id, Autorizacion autorizacion)
         {
             try
             {
-                // TODO: Add update logic here
+                using (CDRModel dbModel = new CDRModel())
+                {
+                    dbModel.Entry(autorizacion).State = EntityState.Modified;
 
-                return RedirectToAction("Index");
+                }
+                    return RedirectToAction("Index");
             }
             catch
             {
@@ -107,20 +115,6 @@ namespace CDRTools.Controllers
             }
         }
 
-
-
-        public static IEnumerable<SelectListItem> ListaExtensiones()
-        {
-            IList<SelectListItem> items = new List<SelectListItem>
-            {
-                new SelectListItem{Text = "California", Value = "B"},
-                new SelectListItem{Text = "Alaska", Value = "B"},
-                new SelectListItem{Text = "Illinois", Value = "B"},
-                new SelectListItem{Text = "Texas", Value = "B"},
-                new SelectListItem{Text = "Washington", Value = "B"}
-
-            };
-            return items;
-        }
+        
     }
 }

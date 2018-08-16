@@ -376,6 +376,7 @@
     <Content Include="Views\Extension\_ExtModal.cshtml" />
     <Content Include="Views\Reporte\_ShowData.cshtml" />
     <Content Include="Views\Autorizacion\Crear.cshtml" />
+    <Content Include="Views\Autorizacion\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -332,7 +332,8 @@
 
         $.post("/Reporte/_ShowData", { ini: fi, fin: ff, ex: s }, function (data) {
             //$(gridContent).hide();
-            $("#gridContent").html(data);
+            $("body").html(data);
+            //$(document).append(data);
         }).fail(function (response) {
             alert("Error");
         });

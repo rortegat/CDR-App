@@ -1,58 +1,44 @@
 ﻿@model CDRTools.Models.ParentViewModel
 
-
-@{
-
-
-
-}
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 
-
-
     <div class="form-horizontal">
         <h4>Autorizacion</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        <div class="form-group" id="q1">
             @Html.LabelFor(model => model.aut.Id_Autorizacion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.aut.Id_Autorizacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.aut.Id_Autorizacion, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="q2">
             @Html.LabelFor(model => model.aut.Autorizacion_Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.aut.Autorizacion_Codigo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.aut.Autorizacion_Codigo, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="q3">
             @Html.LabelFor(model => model.aut.Id_Extension, "Id_Extension", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-
-                    @Html.DropDownListFor(m => m.aut.Id_Extension, Model.ListaExtensiones, "-Seleccione-")
-                
+                @Html.DropDownListFor(m => m.aut.Id_Extension, Model.ListaExtensiones, "--Seleccione extensión--",new { @class = "form-control"})                
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("< Regresar", "Index", "Autorizacion", null, new { @class = "" })
 </div>
 
 @section Scripts {
@@ -61,16 +47,32 @@
 
 <script>
     $(document).ready(function () {
+
         $(":submit").click(function (e) {
             e.preventDefault();
-            var id = $("#aut_Id_Autorizacion").val();
-            var cod = $("#aut_Autorizacion_Codigo").val();
-            var ext = $("#aut_Id_Extension").val();
+            var id = $("#aut_Id_Autorizacion");
+            var cod = $("#aut_Autorizacion_Codigo");
+            var ext = $("#aut_Id_Extension");
+            
+            if (id.val() == "") $("#q1").addClass("has-error")
+            else $("#q1").removeClass("has-error")
+            if (cod.val() == 0) $("#q2").addClass("has-error")
+            else $("#q2").removeClass("has-error")
+            if (ext.val() == "")  $("#q3").addClass("has-error") 
+            else $("#q3").removeClass("has-error")
 
-            $.post("/Autorizacion/CrearAutorizacion", { id_autorizacion: id, codigo: cod, id_extension: ext }, function () {
-                //$(gridContent).hide();
-                alert("listo")
-            });
+            if (id.val() != "" && cod.val() != 0 && ext.val() != "") {
+                $.post("/Autorizacion/CrearAutorizacion", {
+                    id_autorizacion: id.val(),
+                    codigo: cod.val(),
+                    id_extension: ext.val()
+                }, function () {
+                    
+                    alert("Autorización registrada con éxito");
+                    window.location = '/Autorizacion/'
+                });               
+            }
+            else alert("Es necesario llenar todos los campos");
         });
     });
 
