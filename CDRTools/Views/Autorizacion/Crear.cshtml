@@ -25,7 +25,22 @@
         <div class="form-group" id="q3">
             @Html.LabelFor(model => model.aut.Id_Extension, "Id_Extension", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.aut.Id_Extension, Model.ListaExtensiones, "--Seleccione extensión--",new { @class = "form-control"})                
+                <select class="form-control" id="aut_Id_Extension">
+                    <option value="noSelected">--Seleccione extensión--</option>
+                    @foreach (var element in Model.ListaExtensiones) {
+                        <option value="@Html.DisplayFor(modelItem => element.Value)">
+                            @Html.DisplayFor(modelItem => element.Value)
+                            -
+                            @Html.DisplayFor(modelItem => element.Text)
+                        </option>
+                    }
+
+
+                </select>
+
+                @*
+    @Html.DropDownListFor(m => m.aut.Id_Extension, Model.ListaExtensiones, "--Seleccione extensión--",new { @class = "form-control"})
+                *@
             </div>
         </div>
 
@@ -48,7 +63,10 @@
 <script>
     $(document).ready(function () {
 
+       
+
         $(":submit").click(function (e) {
+
             e.preventDefault();
             var id = $("#aut_Id_Autorizacion");
             var cod = $("#aut_Autorizacion_Codigo");
@@ -58,7 +76,7 @@
             else $("#q1").removeClass("has-error")
             if (cod.val() == 0) $("#q2").addClass("has-error")
             else $("#q2").removeClass("has-error")
-            if (ext.val() == "")  $("#q3").addClass("has-error") 
+            if (ext.val() == "noSelected")  $("#q3").addClass("has-error") 
             else $("#q3").removeClass("has-error")
 
             if (id.val() != "" && cod.val() != 0 && ext.val() != "") {

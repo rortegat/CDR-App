@@ -21,24 +21,24 @@ namespace CDRTools.Controllers
 
 
 
-       
+
         // GET: Autorizacion/Create
         public ActionResult Crear()
         {
             CDRModel dbModel = new CDRModel();
-                var viewModel = new ParentViewModel(dbModel.Extensions);
+            var viewModel = new ParentViewModel(dbModel.Extensions);
 
             return View(viewModel);
 
         }
 
-        
+
 
         // POST: Autorizacion/Create
         //[HttpPost]
         public ActionResult CrearAutorizacion(string id_autorizacion, int codigo, string id_extension)
         {
-            var nuevo = new Autorizacion() {Id_Autorizacion = id_autorizacion, Autorizacion_Codigo = codigo, Id_Extension = id_extension };
+            var nuevo = new Autorizacion() { Id_Autorizacion = id_autorizacion, Autorizacion_Codigo = codigo, Id_Extension = id_extension };
 
             try
             {
@@ -61,26 +61,39 @@ namespace CDRTools.Controllers
         {
             using (CDRModel dbModel = new CDRModel())
             {
-                return View(dbModel.Autorizacions.Where(x => x.Id_Autorizacion == id).FirstOrDefault());
+                Autorizacion autorizacion = dbModel.Autorizacions.FirstOrDefault(x => x.Id_Autorizacion == id);
+                if (autorizacion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(autorizacion);
             }
+
         }
 
         // POST: Autorizacion/Edit/5
         [HttpPost]
-        public ActionResult Editar(string id, Autorizacion autorizacion)
+        public ActionResult Editar(String id, Autorizacion modificado)
         {
-            try
+            using (CDRModel dbModel = new CDRModel())
             {
-                using (CDRModel dbModel = new CDRModel())
+                try
                 {
-                    dbModel.Entry(autorizacion).State = EntityState.Modified;
+                   
+                    Autorizacion actual = dbModel.Autorizacions.FirstOrDefault(x => x.Id_Autorizacion == id);
+                    if (actual == null)
+                        return HttpNotFound();
+                    
+                    actual.Autorizacion_Codigo = modificado.Autorizacion_Codigo;
+                    actual.Id_Extension = modificado.Id_Extension;  
 
-                }
+                    dbModel.SaveChanges();
                     return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                }
+                catch
+                {
+                    return View();
+                }
             }
         }
 
@@ -115,6 +128,6 @@ namespace CDRTools.Controllers
             }
         }
 
-        
+
     }
 }

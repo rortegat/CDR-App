@@ -1,36 +1,4 @@
-﻿@*<div> 
-    <table>
-        <thead>
-                <tr>
-                    <th>ID_Mnager</th>
-                    <th>Call_ID</th>
-                    <th>Fecha</th>
-                    <th>Extencion</th>
-                    <th>Descripcion</th>
-                    <th>Llamado</th>
-                    <th>Duracion</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    foreach (System.Data.DataRow dr in ViewBag.emp.Rows)
-                    {
-                        <tr>
-                            <td>@dr["globalCallID_callManagerId"]</td>
-                            <td>@dr["globalCallID_callId"]</td>
-                            <td>@dr["dateTimeOrigination"]</td>
-                            <td>@dr["callingPartyNumber"]</td>
-                            <td>@dr["Extension_Descripcion"]</td>
-                            <td>@dr["originalCalledPartyNumber"]</td>
-                            <td>@dr["duration"]</td>    
-                        </tr>
-                    }
-                }
-                
-            </tbody>
-    </table>
-</div>*@
-
+﻿
 @{
     CDRTools.Models.Get_Llamadas_Extensiones product = new CDRTools.Models.Get_Llamadas_Extensiones();
 }
@@ -54,16 +22,4 @@
             grid.Column("originalCalledPartyNumber", "Numero Llamado"),
             grid.Column("duration", "Duracion")
     ))
-
-    @*@if (grid.HasSelection)
-    {
-        product = (CDRTools.Models.Get_Llamadas_Extensiones)grid.Rows[grid.SelectedIndex].Value;
-        <b>Manager ID</b> @product.globalCallID_callManagerId<br />
-        <b>Call ID</b>  @product.globalCallID_callId<br />
-            <b>Fecha</b> @product.dateTimeOrigination<br />
-            <b>Extension</b> @product.callingPartyNumber<br />
-            <b>Descripcion</b> @product.Extension_Descripcion<br />
-            <b>Numero Llamado</b> @product.originalCalledPartyNumber<br />
-            <b>Duracion</b> @product.duration<br />
-    }*@
 </div>

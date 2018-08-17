@@ -19,7 +19,7 @@ namespace CDRTools.Models
             ListaExtensiones = items
                 .Select(i => new SelectListItem()
                 {
-                    Text = i.Id_Extension,
+                    Text = i.Extension_Descripcion,
                     Value = i.Id_Extension
                 })
                 .ToList();
