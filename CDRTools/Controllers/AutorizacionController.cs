@@ -59,8 +59,10 @@ namespace CDRTools.Controllers
         // GET: Autorizacion/Edit/5
         public ActionResult Editar(string id)
         {
+
             using (CDRModel dbModel = new CDRModel())
             {
+
                 Autorizacion autorizacion = dbModel.Autorizacions.FirstOrDefault(x => x.Id_Autorizacion == id);
                 if (autorizacion == null)
                 {

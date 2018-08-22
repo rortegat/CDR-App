@@ -16,7 +16,7 @@ namespace CDRTools.Models
 
         public ParentViewModel(IEnumerable<Extension> items)
         {
-            ListaExtensiones = items
+            var ListaExtensiones = items
                 .Select(i => new SelectListItem()
                 {
                     Text = i.Extension_Descripcion,
@@ -24,5 +24,7 @@ namespace CDRTools.Models
                 })
                 .ToList();
         }
+
+        
     }
 }
